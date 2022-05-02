@@ -1,0 +1,93 @@
+﻿@model LikeButtonTest.Models.Research
+@using LikeButtonTest.Models
+
+@{
+    ViewBag.Title = "details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>""
+    <script src="https://kit.fontawesome.com/11391bee6d.js" crossorigin="anonymous"></script>
+    @*<script type="text/javascript">
+        $("#Like").click(function () {
+
+              debugger;
+            ajaxGet("@Url.Content("~/User/Home / Like ")/?id=" + @Model.ResearchId + "&status=" + $(this).data("status"), function (data) {
+                var counters = data.split('/');
+                $("#likecount").text(counters[0]);
+                $("#dislikecount").text(counters[1]);
+                $("#Like").attr('disabled', 'disabled');
+                $("#Dislike").attr('disabled', false);
+            });
+    }); //
+  $("#Dislike").click(function () {
+
+      debugger;
+
+    ajaxGet("@Url.Content("~/User/Home / Like ")/?id=" + @Model.ResearchId + "&status=" + $(this).data("status"), function (data) {
+        var counters = data.split('/');
+        $("#likecount").text(counters[0]);
+        $("#dislikecount").text(counters[1]);
+        $("#Dislike").attr('disabled', 'disabled');
+        $("#Like").attr('disabled', false);
+    });
+    });
+
+    </script>*@
+</head>
+<h2>details</h2>
+@foreach (Like user in ViewBag.AllUserlikedislike)
+{
+    
+    ViewBag.userid = user.UserId;
+    ViewBag.userlike = user.IsLike;
+
+
+}
+
+@if (@ViewBag.userlike == true) //if a user liked then he can only dislike
+{
+    <button class="btn btn-info btn-xs like-button"
+            disabled data - status="true"
+            id="Like">
+        Like <i class="fa fa-thumbs-o-up"> </i> <span id="likecount">@ViewBag.like</span>
+    </button>
+    <button class="btn btn-info btn-xs like-button"
+            data - status="false"
+            id="Dislike">
+        Dislike <i class="fa fa-thumbs-o-down"> </i><span id="dislikecount">@ViewBag.Dislike</span>
+    </button>
+
+}
+else if (@ViewBag.userlike == false) //if a user disliked then he can only like
+{
+    <button class="btn btn-info btn-xs like-button"
+            data - status="true"
+            id="Like">
+        Like <i class="fa fa-thumbs-o-up"> </i> <span id="likecount"> @ViewBag.like </span>
+    </button>
+    <button class="btn btn-info btn-xs like-button"
+            disabled data - status="false"
+            id="Dislike">
+        Dislike <i class="fa fa-thumbs-o- down"> </i><span id="dislikecount">@ViewBag.Dislike</span>
+    </button>
+}
+else
+{
+    <button class="btn btn-info btn-xs like-button"
+            data - status="true"
+            id="Like">
+        Like <i class="fa fa-thumbs-o-up"> </i> <span id="likecount">@ViewBag.like</span>
+    </button>
+    <button class="btn btn-info btn-xs like-button"
+            data - status="false"
+            id="Dislike">
+        Dislike <i class="fa fa-thumbs-o-down"> </i><span id="dislikecount">@ViewBag.Dislike</span>
+    </button>
+}
+
+
+
+

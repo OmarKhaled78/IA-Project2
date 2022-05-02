@@ -1,0 +1,72 @@
+﻿@using LikeButtonTest.Models
+@model LikeButtonTest.Models.Research
+
+
+@{
+    ViewBag.Title = "details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+</head>
+<h2>details</h2>
+<div class="card card-outline-secondary my-4">
+    <div class="card-header"
+         Comments Section
+    </div>
+    <div class="card-body">
+
+        <p>This is a test comment This is a test comment This is a test comment This is a test comment This is a test comment</p>
+        <small class="text-muted">Posted by Anonymous on 28/4/2022 </small>
+        <hr />
+        <br />
+        <p>This is a test comment This is a test comment This is a test comment This is a test comment This is a test comment<p>
+        <small class="text-muted">Posted by Anonymous on 28/4/2022 </small>
+        <hr />
+        <br />
+        <p>This is a test comment This is a test comment This is a test comment This is a test comment This is a test comment</p>                                                                                                                   
+        <small class="text-muted">Posted by Anonymous on 28/4/2022 </small>
+        <hr />
+        <form id="CommentForm">
+            <input type="hidden" name="CommentId" value="23" />
+            <input type="hidden" name="ResearchId" value="@Model.ResearchId" />
+            <div class="form-group">
+                <label>Enter Your Comment</label>
+                <textarea class="form-control" rows="3" placeholder="Your Comment" name="CommentText"></textarea>
+            </div>
+            <button class="btn btn-success" id="btnComment" type="button">Comment</button>
+        </form>
+
+
+
+    </div>
+
+</div>
+<script>
+    $("btnComment").click(function () {
+        $.ajax({
+            url: "@Url.Action("LeaveComment", "Comments")",
+            type: "post",
+            data: $("#CommentForm").serialize()
+
+
+
+
+        }).done(function (response) {
+            debugger;
+            if (response.Success) {
+                window.location.reload();
+            }
+            else {
+                alert("Error!");
+            }
+
+
+        }).fail(function () {
+            alert("Error2!");
+        });
+    });
+</script>
